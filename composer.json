@@ -1,0 +1,36 @@
+{
+    "name": "cultuurnet/transform-entry-store",
+    "description": "library to store data from external partners that is transformed to work with Entry API",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [],
+    "require": {
+        "doctrine/dbal": "^2.5",
+        "doctrine/migrations": "^1.4",
+        "cultuurnet/valueobjects": "~3.0",
+        "cultuurnet/udb3": "~0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "squizlabs/php_codesniffer": "~2.3",
+        "phing/phing": "~2.11",
+        "satooshi/php-coveralls": "~0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "CultuurNet\\TransformEntryStore\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CultuurNet\\TransformEntryStore\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    }
+}
