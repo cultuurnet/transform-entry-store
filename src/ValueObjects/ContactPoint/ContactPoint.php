@@ -1,14 +1,15 @@
 <?php
 
-namespace CultuurNet\TransformEntryStore\ValueObjects\BookingInfo;
+namespace CultuurNet\TransformEntryStore\ValueObjects\ContactPoint;
 
-use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Web\EmailAddress;
-use ValueObjects\Web\Url;
 use ValueObjects\ValueObjectInterface;
 
-class BookingInfo implements ValueObjectInterface
+abstract class ContactPoint implements ValueObjectInterface
 {
+    /**
+     * @var ContactPointType
+     */
+    private $contactPointType;
 
     /**
      * Returns a object taking PHP native value(s) as argument(s).
@@ -42,16 +43,11 @@ class BookingInfo implements ValueObjectInterface
     }
 
     /**
-     * @param StringLiteral $externalId
-     * @param Url $url
-     * @param StringLiteral $urlLabel
-     * @param EmailAddress $emailAddress
+     * ContactPoint constructor.
+     * @param ContactPointType $contactPointType
      */
-    public function __construct(
-        StringLiteral $externalId,
-        Url $url,
-        StringLiteral $urlLabel,
-        EmailAddress $emailAddress
-    ) {
+    public function __construct(ContactPointType $contactPointType)
+    {
+        $this->contactPointType = $contactPointType;
     }
 }

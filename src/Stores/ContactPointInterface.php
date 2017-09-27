@@ -2,25 +2,25 @@
 
 namespace CultuurNet\TransformEntryStore\Stores;
 
-use CultuurNet\TransformEntryStore\ValueObjects\BookingInfo\BookingInfo;
+use CultuurNet\TransformEntryStore\ValueObjects\ContactPoint\ContactPoint;
 use ValueObjects\StringLiteral\StringLiteral;
 
-interface BookingInfoInterface
+interface ContactPointInterface
 {
     /**
      * @param StringLiteral $externalId
-     * @param BookingInfo $bookingInfo
+     * @param ContactPoint $contactPoint
      */
-    public function saveBookingInfo(
+    public function saveContactPoint(
         StringLiteral $externalId,
-        BookingInfo $bookingInfo
+        ContactPoint $contactPoint
     );
 
     /**
      * @param StringLiteral $externalId
-     * @return BookingInfo
+     * @return array
      */
-    public function getBookingInfo(
+    public function getContactPoints(
         StringLiteral $externalId
     );
 }
