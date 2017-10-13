@@ -8,18 +8,27 @@ interface NameRepositoryInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return StringLiteral
+     */
+    public function getName(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param StringLiteral $name
      */
     public function saveName(
         StringLiteral $externalId,
         StringLiteral $name
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return StringLiteral
+     * @param StringLiteral $name
      */
-    public function getName(
-        StringLiteral $externalId
+    public function updateName(
+        StringLiteral $externalId,
+        StringLiteral $name
     );
 }
