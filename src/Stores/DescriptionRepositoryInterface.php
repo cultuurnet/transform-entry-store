@@ -17,6 +17,15 @@ interface DescriptionRepositoryInterface
 
     /**
      * @param StringLiteral $externalId
+     * @param StringLiteral $description
+     */
+    public function updateDescription(
+        StringLiteral $externalId,
+        StringLiteral $description
+    );
+
+    /**
+     * @param StringLiteral $externalId
      * @return StringLiteral
      */
     public function getDescription(
