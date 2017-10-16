@@ -38,12 +38,35 @@ class StoreNameDBALRepository extends AbstractDBALRepository implements NameRepo
 
         $queryBuilder->insert($this->getTableName()->toNative())
             ->values([
-                SchemaDescriptionConfigurator::EXTERNAL_ID_COLUMN => '?',
-                SchemaDescriptionConfigurator::DESCRIPTION_COLUMN => '?'
+                SchemaNameConfigurator::EXTERNAL_ID_COLUMN => '?',
+                SchemaNameConfigurator::NAME_COLUMN => '?'
             ])
             ->setParameters([
                 $externalId,
                 $name
+            ]);
+
+        $queryBuilder->execute();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateName(StringLiteral $externalId, StringLiteral $name)
+    {
+        $whereId = SchemaNameConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->update($this->getTableName()->toNative())
+            ->set(
+                SchemaNameConfigurator::NAME_COLUMN,
+                ':name'
+            )
+            ->where($whereId)
+            ->setParameters([
+                SchemaNameConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative(),
+                SchemaNameConfigurator::NAME_COLUMN => $name->toNative()
             ]);
 
         $queryBuilder->execute();
