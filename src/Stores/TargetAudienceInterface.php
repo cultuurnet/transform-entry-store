@@ -7,6 +7,14 @@ use ValueObjects\StringLiteral\StringLiteral;
 
 interface TargetAudienceInterface
 {
+     /**
+     * @param StringLiteral $externalId
+     * @return TargetAudience
+     */
+    public function getTargetAudience(
+        StringLiteral $externalId
+    );
+    
     /**
      * @param StringLiteral $externalId
      * @param TargetAudience $targetAudience
@@ -14,13 +22,5 @@ interface TargetAudienceInterface
     public function saveTargetAudience(
         StringLiteral $externalId,
         TargetAudience $targetAudience
-    );
-
-    /**
-     * @param StringLiteral $externalId
-     * @return TargetAudience
-     */
-    public function getTargetAudience(
-        StringLiteral $externalId
     );
 }
