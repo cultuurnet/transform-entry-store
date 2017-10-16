@@ -9,18 +9,27 @@ interface AgeRangeInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return AgeRange
+     */
+    public function getAgeRange(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param AgeRange $ageRange
      */
     public function saveAgeRange(
         StringLiteral $externalId,
         AgeRange $ageRange
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return AgeRange
+     * @param AgeRange $ageRange
      */
-    public function getAgeRange(
-        StringLiteral $externalId
+    public function updateAgeRange(
+        StringLiteral $externalId,
+        AgeRange $ageRange
     );
 }

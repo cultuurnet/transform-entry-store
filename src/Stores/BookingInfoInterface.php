@@ -9,18 +9,27 @@ interface BookingInfoInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return BookingInfo
+     */
+    public function getBookingInfo(
+        StringLiteral $externalId
+    );
+
+    /**
+     * @param StringLiteral $externalId
      * @param BookingInfo $bookingInfo
      */
     public function saveBookingInfo(
         StringLiteral $externalId,
         BookingInfo $bookingInfo
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return BookingInfo
+     * @param BookingInfo $bookingInfo
      */
-    public function getBookingInfo(
-        StringLiteral $externalId
+    public function updateBookingInfo(
+        StringLiteral $externalId,
+        BookingInfo $bookingInfo
     );
 }

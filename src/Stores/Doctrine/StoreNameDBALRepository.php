@@ -2,31 +2,32 @@
 
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
-use CultuurNet\TransformEntryStore\Stores\NameRepositoryInterface;
+use CultuurNet\TransformEntryStore\Stores\NameInterface;
 use ValueObjects\StringLiteral\StringLiteral;
 
-class StoreNameDBALRepository extends AbstractDBALRepository implements NameRepositoryInterface
+class StoreNameDBALRepository extends AbstractDBALRepository implements NameInterface
 {
     /**
      * @inheritdoc
      */
     public function getName(StringLiteral $externalId)
     {
-          $whereId = SchemaNameConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+        $whereId = SchemaNameConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-
-        $queryBuilder->update($this->getTableName()->toNative())
-            ->set(
-                SchemaNameConfigurator::NAME_COLUMN,
-                ':name'
-            )
+        $queryBuilder->select(SchemaNameConfigurator::NAME_COLUMN)
+            ->from($this->getTableName()->toNative())
             ->where($whereId)
-            ->setParameters([
-                SchemaNameConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative()
-            ]);
+            ->setParameter('externalId', $externalId);
 
-        $queryBuilder->execute();
+        $statement = $queryBuilder->execute();
+        $resultSet = $statement->fetchAll();
+
+        if (empty($resultSet)) {
+            return null;
+        } else {
+            return StringLiteral::fromNative($resultSet[0]['name']);
+        }
     }
 
      /**

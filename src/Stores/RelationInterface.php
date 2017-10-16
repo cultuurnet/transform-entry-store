@@ -9,18 +9,18 @@ interface RelationInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return UUID
+     */
+    public function getCdbid(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param UUID $cdbid
      */
     public function saveCdbid(
         StringLiteral $externalId,
         UUID $cdbid
-    );
-
-    /**
-     * @param StringLiteral $externalId
-     * @return UUID
-     */
-    public function getCdbid(
-        StringLiteral $externalId
     );
 }

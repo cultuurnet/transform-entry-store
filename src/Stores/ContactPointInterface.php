@@ -9,18 +9,27 @@ interface ContactPointInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return array
+     */
+    public function getContactPoints(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param ContactPoint $contactPoint
      */
     public function saveContactPoint(
         StringLiteral $externalId,
         ContactPoint $contactPoint
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return array
+     * @param ContactPoint $contactPoint
      */
-    public function getContactPoints(
-        StringLiteral $externalId
+    public function updateContactPoint(
+        StringLiteral $externalId,
+        ContactPoint $contactPoint
     );
 }

@@ -11,16 +11,6 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
     /**
      * @inheritdoc
      */
-    public function saveAgeRange(
-        StringLiteral $externalId,
-        AgeRange $ageRange
-    ) {
-        // TODO: Implement saveAgeRange() method.
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getAgeRange(
         StringLiteral $externalId
     ) {
@@ -39,5 +29,25 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
         } else {
             return UUID::fromNative($resultSet[0]['cdbid']);
         }
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function saveAgeRange(
+        StringLiteral $externalId,
+        AgeRange $ageRange
+    ) {
+        // TODO: Implement saveAgeRange() method.
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function updateAgeRange(
+        StringLiteral $externalId,
+        AgeRange $ageRange
+    ) {
+        // TODO: Implement updateAgeRange() method.
     }
 }

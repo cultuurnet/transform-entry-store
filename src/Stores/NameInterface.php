@@ -4,7 +4,7 @@ namespace CultuurNet\TransformEntryStore\Stores;
 
 use ValueObjects\StringLiteral\StringLiteral;
 
-interface NameRepositoryInterface
+interface NameInterface
 {
     /**
      * @param StringLiteral $externalId

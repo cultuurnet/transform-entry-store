@@ -10,6 +10,30 @@ class StoreDescriptionDBALRepository extends AbstractDBALRepository implements D
     /**
      * @inheritdoc
      */
+    public function getDescription(
+        StringLiteral $externalId
+    ) {
+        $whereId = SchemaDescriptionConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+
+        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder->select(SchemaDescriptionConfigurator::DESCRIPTION_COLUMN)
+            ->from($this->getTableName()->toNative())
+            ->where($whereId)
+            ->setParameter('externalId', $externalId);
+
+        $statement = $queryBuilder->execute();
+        $resultSet = $statement->fetchAll();
+
+        if (empty($resultSet)) {
+            return null;
+        } else {
+            return StringLiteral::fromNative($resultSet[0]['description']);
+        }
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function saveDescription(
         StringLiteral $externalId,
         StringLiteral $description
@@ -52,29 +76,5 @@ class StoreDescriptionDBALRepository extends AbstractDBALRepository implements D
             ]);
 
         $queryBuilder->execute();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription(
-        StringLiteral $externalId
-    ) {
-        $whereId = SchemaDescriptionConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
-
-        $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaDescriptionConfigurator::DESCRIPTION_COLUMN)
-            ->from($this->getTableName()->toNative())
-            ->where($whereId)
-            ->setParameter('externalId', $externalId);
-
-        $statement = $queryBuilder->execute();
-        $resultSet = $statement->fetchAll();
-
-        if (empty($resultSet)) {
-            return null;
-        } else {
-            return StringLiteral::fromNative($resultSet[0]['description']);
-        }
     }
 }

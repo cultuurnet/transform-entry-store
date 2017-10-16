@@ -8,6 +8,14 @@ interface DescriptionRepositoryInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return StringLiteral
+     */
+    public function getDescription(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param StringLiteral $description
      */
     public function saveDescription(
@@ -22,13 +30,5 @@ interface DescriptionRepositoryInterface
     public function updateDescription(
         StringLiteral $externalId,
         StringLiteral $description
-    );
-
-    /**
-     * @param StringLiteral $externalId
-     * @return StringLiteral
-     */
-    public function getDescription(
-        StringLiteral $externalId
     );
 }

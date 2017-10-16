@@ -9,18 +9,27 @@ interface LocationInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return UUID
+     */
+    public function getLocationCdbid(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
      * @param UUID $locationCdbid
      */
     public function saveLocationCdbid(
         StringLiteral $externalId,
         UUID $locationCdbid
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return UUID
+     * @param UUID $locationCdbid
      */
-    public function getLocationCdbid(
-        StringLiteral $externalId
+    public function updateLocationCdbid(
+        StringLiteral $externalId,
+        UUID $locationCdbid
     );
 }
