@@ -9,7 +9,12 @@ use ValueObjects\StringLiteral\StringLiteral;
 
 class SchemaEventProductionConfigurator implements SchemaConfiguratorInterface
 {
-    const EXTERNAL_ID_COLUMN = 'external_id';
+    const EXTERNAL_ID_EVENT_COLUMN = 'external_id_event';
+    const EXTERNAL_ID_PRODUCTION_COLUMN = 'external_id_production';
+    /**
+     * @var StringLiteral
+     */
+    protected $tableName;
     
     /**
      * @param StringLiteral $tableName
@@ -27,14 +32,15 @@ class SchemaEventProductionConfigurator implements SchemaConfiguratorInterface
         $schema = $schemaManager->createSchema();
         $table = $schema->createTable($this->tableName->toNative());
 
-        $table->addColumn(self::EXTERNAL_ID_COLUMN, Type::STRING)
+        $table->addColumn(self::EXTERNAL_ID_EVENT_COLUMN, Type::STRING)
             ->setLength(128)
             ->setNotnull(true);
-        $table->addColumn(self::LOCATION_CDBID_COLUMN, Type::GUID)
-            ->setLength(36)
+        $table->addColumn(self::EXTERNAL_ID_PRODUCTION_COLUMN, Type::STRING)
+            ->setLength(128)
             ->setNotnull(true);
 
-        $table->addUniqueIndex([self::EXTERNAL_ID_COLUMN]);
+
+        $table->addUniqueIndex([self::EXTERNAL_ID_EVENT_COLUMN]);
 
         $schemaManager->createTable($table);
     }

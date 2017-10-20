@@ -4,6 +4,7 @@ namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
 use CultuurNet\TransformEntryStore\Stores\AgeRangeInterface;
 use CultuurNet\TransformEntryStore\ValueObjects\AgeRange\AgeRange;
+use ValueObjects\Identity\UUID;
 use ValueObjects\StringLiteral\StringLiteral;
 
 class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeRangeInterface

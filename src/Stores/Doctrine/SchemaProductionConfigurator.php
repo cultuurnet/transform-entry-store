@@ -33,13 +33,13 @@ class SchemaProductionConfigurator implements SchemaConfiguratorInterface
         $schema = $schemaManager->createSchema();
         $table = $schema->createTable($this->tableName->toNative());
 
-        $table->addColumn(self::CDBID_COLUMN, Type::GUID)
+        $table->addColumn(self::PRODUCTION_COLUMN, Type::GUID)
             ->setLength(36);
         $table->addColumn(self::EXTERNAL_ID_COLUMN, Type::STRING)
             ->setLength(128)
             ->setNotnull(true);
 
-        $table->addUniqueIndex([self::CDBID_COLUMN]);
+        $table->addUniqueIndex([self::PRODUCTION_COLUMN]);
         $table->addUniqueIndex([self::EXTERNAL_ID_COLUMN]);
 
         $schemaManager->createTable($table);

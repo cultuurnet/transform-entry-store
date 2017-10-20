@@ -16,7 +16,7 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
         $whereId = SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaOrganizerConfigurator::NAME_COLUMN)
+        $queryBuilder->select(SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
             ->setParameter('externalId', $externalId);
