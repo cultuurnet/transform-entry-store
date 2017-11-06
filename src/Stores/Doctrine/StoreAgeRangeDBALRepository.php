@@ -18,7 +18,7 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
         $whereId =  SchemaAgeRangeConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaRelationConfigurator::CDBID_COLUMN)
+        $queryBuilder->select(SchemaAgeRangeConfigurator::AGE_FROM_COLUMN, SchemaAgeRangeConfigurator::AGE_TO_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
             ->setParameter('externalId', $externalId);
@@ -28,7 +28,7 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
         if (empty($resultSet)) {
             return null;
         } else {
-            return UUID::fromNative($resultSet[0]['cdbid']);
+            return UUID::fromNative($resultSet[0]);
         }
     }
     
@@ -39,7 +39,21 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
         StringLiteral $externalId,
         AgeRange $ageRange
     ) {
-        // TODO: Implement saveAgeRange() method.
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->insert($this->getTableName()->toNative())
+            ->values([
+                SchemaAgeRangeConfigurator::EXTERNAL_ID_COLUMN => '?',
+                SchemaAgeRangeConfigurator::AGE_FROM_COLUMN => '?',
+                SchemaAgeRangeConfigurator::AGE_TO_COLUMN => '?'
+            ])
+            ->setParameters([
+                $externalId,
+                $ageRange->getAgeFrom(),
+                $ageRange->getAgeTo()
+            ]);
+
+        $queryBuilder->execute();
     }
     
     /**
@@ -49,6 +63,26 @@ class StoreAgeRangeDBALRepository extends AbstractDBALRepository implements AgeR
         StringLiteral $externalId,
         AgeRange $ageRange
     ) {
-        // TODO: Implement updateAgeRange() method.
+        $whereId = SchemaAgeRangeConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->update($this->getTableName()->toNative())
+            ->set(
+                SchemaAgeRangeConfigurator::AGE_FROM_COLUMN,
+                ':ageFrom'
+            )
+            ->set(
+                SchemaAgeRangeConfigurator::AGE_TO_COLUMN,
+                ':ageTo'
+            )
+            ->where($whereId)
+            ->setParameters([
+                SchemaAgeRangeConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative(),
+                SchemaAgeRangeConfigurator::AGE_FROM_COLUMN => $ageRange->getAgeFrom()->toNative(),
+                SchemaAgeRangeConfigurator::AGE_TO_COLUMN => $ageRange->getAgeTo()->toNative()
+            ]);
+
+        $queryBuilder->execute();
     }
 }
