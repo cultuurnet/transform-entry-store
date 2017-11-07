@@ -7,16 +7,15 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Types\Type;
 use ValueObjects\StringLiteral\StringLiteral;
 
-class SchemaProductionConfigurator implements SchemaConfiguratorInterface
+class SchemaEventProductionConfigurator implements SchemaConfiguratorInterface
 {
-    const EXTERNAL_ID_COLUMN = 'external_id';
-    const PRODUCTION_COLUMN = 'cdbid';
-
+    const EXTERNAL_ID_EVENT_COLUMN = 'external_id_event';
+    const EXTERNAL_ID_PRODUCTION_COLUMN = 'external_id_production';
     /**
      * @var StringLiteral
      */
     protected $tableName;
-
+    
     /**
      * @param StringLiteral $tableName
      */
@@ -24,8 +23,8 @@ class SchemaProductionConfigurator implements SchemaConfiguratorInterface
     {
         $this->tableName = $tableName;
     }
-
-    /**
+    
+     /**
      * @inheritdoc
      */
     public function configure(AbstractSchemaManager $schemaManager)
@@ -33,14 +32,15 @@ class SchemaProductionConfigurator implements SchemaConfiguratorInterface
         $schema = $schemaManager->createSchema();
         $table = $schema->createTable($this->tableName->toNative());
 
-        $table->addColumn(self::PRODUCTION_COLUMN, Type::GUID)
-            ->setLength(36);
-        $table->addColumn(self::EXTERNAL_ID_COLUMN, Type::STRING)
+        $table->addColumn(self::EXTERNAL_ID_EVENT_COLUMN, Type::STRING)
+            ->setLength(128)
+            ->setNotnull(true);
+        $table->addColumn(self::EXTERNAL_ID_PRODUCTION_COLUMN, Type::STRING)
             ->setLength(128)
             ->setNotnull(true);
 
-        $table->addUniqueIndex([self::PRODUCTION_COLUMN]);
-        $table->addUniqueIndex([self::EXTERNAL_ID_COLUMN]);
+
+        $table->addUniqueIndex([self::EXTERNAL_ID_EVENT_COLUMN]);
 
         $schemaManager->createTable($table);
     }

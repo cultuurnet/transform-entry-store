@@ -4,22 +4,23 @@ namespace CultuurNet\TransformEntryStore\Stores;
 
 use ValueObjects\StringLiteral\StringLiteral;
 
-interface NameRepositoryInterface
+interface LabelInterface
 {
     /**
      * @param StringLiteral $externalId
-     * @param StringLiteral $name
+     * @param StringLiteral $label
      */
-    public function saveName(
+    public function addLabel(
         StringLiteral $externalId,
-        StringLiteral $name
+        StringLiteral $label
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return StringLiteral
+     * @param StringLiteral $label
      */
-    public function getName(
-        StringLiteral $externalId
+    public function deleteLabel(
+        StringLiteral $externalId,
+        StringLiteral $label
     );
 }

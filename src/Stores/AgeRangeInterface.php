@@ -2,36 +2,34 @@
 
 namespace CultuurNet\TransformEntryStore\Stores;
 
-use ValueObjects\Number\Integer as IntegerLiteral;
+use CultuurNet\TransformEntryStore\ValueObjects\AgeRange\AgeRange;
 use ValueObjects\StringLiteral\StringLiteral;
 
 interface AgeRangeInterface
 {
     /**
      * @param StringLiteral $externalId
-     * @param IntegerLiteral $ageFrom
-     * @param IntegerLiteral $ageTo
-     * @return
+     * @return AgeRange
+     */
+    public function getAgeRange(
+        StringLiteral $externalId
+    );
+    
+    /**
+     * @param StringLiteral $externalId
+     * @param AgeRange $ageRange
      */
     public function saveAgeRange(
         StringLiteral $externalId,
-        IntegerLiteral $ageFrom,
-        IntegerLiteral $ageTo
+        AgeRange $ageRange
     );
-
+    
     /**
      * @param StringLiteral $externalId
-     * @return IntegerLiteral
+     * @param AgeRange $ageRange
      */
-    public function getAgeFrom(
-        StringLiteral $externalId
-    );
-
-    /**
-     * @param StringLiteral $externalId
-     * @return IntegerLiteral
-     */
-    public function getAgeTo(
-        StringLiteral $externalId
+    public function updateAgeRange(
+        StringLiteral $externalId,
+        AgeRange $ageRange
     );
 }

@@ -2,34 +2,34 @@
 
 namespace CultuurNet\TransformEntryStore\Stores;
 
-use CultuurNet\TransformEntryStore\ValueObjects\BookingInfo\BookingInfo;
+use ValueObjects\Identity\UUID;
 use ValueObjects\StringLiteral\StringLiteral;
 
-interface BookingInfoInterface
+interface OrganizerInterface
 {
     /**
      * @param StringLiteral $externalId
-     * @return BookingInfo
+     * @return UUID
      */
-    public function getBookingInfo(
+    public function getOrganizerCdbid(
         StringLiteral $externalId
-    );
-
-    /**
-     * @param StringLiteral $externalId
-     * @param BookingInfo $bookingInfo
-     */
-    public function saveBookingInfo(
-        StringLiteral $externalId,
-        BookingInfo $bookingInfo
     );
     
     /**
      * @param StringLiteral $externalId
-     * @param BookingInfo $bookingInfo
+     * @param UUID $organizerCdbid
      */
-    public function updateBookingInfo(
+    public function saveOrganizerCdbid(
         StringLiteral $externalId,
-        BookingInfo $bookingInfo
+        UUID $organizerCdbid
+    );
+    
+    /**
+     * @param StringLiteral $externalId
+     * @param UUID $organizerCdbid
+     */
+    public function updateOrganizerCdbid(
+        StringLiteral $externalId,
+        UUID $organizerCdbid
     );
 }
