@@ -55,7 +55,6 @@ class SchemaBookingInfoConfigurator implements SchemaConfiguratorInterface
         $table->addColumn(self::AVAILABILITY_STARTS_COLUMN, TYPE::DATETIMETZ)
             ->setNotnull(true);
 
-
         $table->addUniqueIndex([self::EXTERNAL_ID_COLUMN]);
 
         $schemaManager->createTable($table);
