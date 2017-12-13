@@ -2,21 +2,21 @@
 
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
-use CultuurNet\TransformEntryStore\Stores\OrganizerInterface;
+use CultuurNet\TransformEntryStore\Stores\LocationInterface;
 use ValueObjects\StringLiteral\StringLiteral;
 use ValueObjects\Identity\UUID;
 
-class StoreOrganizerDBALRepository extends AbstractDBALRepository implements OrganizerInterface
+class StoreLocationDBALRepository extends AbstractDBALRepository implements LocationInterface
 {
     /**
      * @inheritdoc
      */
-    public function getOrganizerCdbid(StringLiteral $externalId)
+    public function getLocationCdbid(StringLiteral $externalId)
     {
-        $whereId = SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+        $whereId = SchemaLocationConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN)
+        $queryBuilder->select(SchemaLocationConfigurator::LOCATION_CDBID_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
             ->setParameter('externalId', $externalId);
@@ -34,20 +34,19 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
     /**
      * @inheritdoc
      */
-    public function saveOrganizerCdbid(StringLiteral $externalId, UUID $organizerCdbid)
+    public function saveLocationCdbid(StringLiteral $externalId, UUID $locationCdbid)
     {
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->insert($this->getTableName()->toNative())
             ->values([
 
-
-                SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN => '?',
-                SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN => '?'
+                SchemaLocationConfigurator::EXTERNAL_ID_COLUMN => '?',
+                SchemaLocationConfigurator::LOCATION_CDBID_COLUMN => '?'
             ])
             ->setParameters([
                 $externalId,
-                $organizerCdbid
+                $locationCdbid
             ]);
 
         $queryBuilder->execute();
@@ -56,8 +55,8 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
     /**
      * @inheritdoc
      */
-    public function updateOrganizerCdbid(StringLiteral $externalId, UUID $organizerCdbid)
+    public function updateLocationCdbid(StringLiteral $externalId, UUID $locationCdbid)
     {
-        // TODO: Implement updateOrganizerCdbid() method.
+        // TODO: Implement updateLocationCdbid() method.
     }
 }

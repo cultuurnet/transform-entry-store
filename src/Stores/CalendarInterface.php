@@ -2,6 +2,8 @@
 
 namespace CultuurNet\TransformEntryStore\Stores;
 
+use ValueObjects\DateTime\Date;
+use ValueObjects\DateTime\Time;
 use ValueObjects\StringLiteral\StringLiteral;
 
 interface CalendarInterface
@@ -23,10 +25,16 @@ interface CalendarInterface
 
     /**
      * @param StringLiteral $externalId
-     * @param array $calendar
+     * @param $date
+     * @param $timeStart
+     * @param $timeEnd
+     * @return
+     * @internal param array $calendar
      */
     public function saveCalendar(
         StringLiteral $externalId,
-        array $calendar
+        $date,
+        $timeStart,
+        $timeEnd
     );
 }

@@ -3,6 +3,8 @@
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
 use CultuurNet\TransformEntryStore\Stores\CalendarInterface;
+use ValueObjects\DateTime\Date;
+use ValueObjects\DateTime\Time;
 use ValueObjects\StringLiteral\StringLiteral;
 
 class StoreCalendarDBALRepository extends AbstractDBALRepository implements CalendarInterface
@@ -49,7 +51,9 @@ class StoreCalendarDBALRepository extends AbstractDBALRepository implements Cale
      */
     public function saveCalendar(
         StringLiteral $externalId,
-        array $calendar
+        $date,
+        $timeStart,
+        $timeEnd
     ) {
         $queryBuilder = $this->createQueryBuilder();
 
@@ -62,9 +66,9 @@ class StoreCalendarDBALRepository extends AbstractDBALRepository implements Cale
             ])
             ->setParameters([
                 $externalId,
-                $calendar[1],
-                $calendar[2],
-                $calendar[3]
+                $date,
+                $timeStart,
+                $timeEnd
             ]);
 
         $queryBuilder->execute();

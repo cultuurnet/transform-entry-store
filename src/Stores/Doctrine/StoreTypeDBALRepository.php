@@ -2,21 +2,22 @@
 
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
-use CultuurNet\TransformEntryStore\Stores\OrganizerInterface;
+use CultuurNet\TransformEntryStore\Stores\TypeRepositoryInterface;
 use ValueObjects\StringLiteral\StringLiteral;
 use ValueObjects\Identity\UUID;
 
-class StoreOrganizerDBALRepository extends AbstractDBALRepository implements OrganizerInterface
+class StoreTypeDBALRepository extends AbstractDBALRepository implements TypeRepositoryInterface
 {
     /**
      * @inheritdoc
      */
-    public function getOrganizerCdbid(StringLiteral $externalId)
-    {
-        $whereId = SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+    public function getTypeId(
+        StringLiteral $externalId
+    ) {
+        $whereId = SchemaTypeConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN)
+        $queryBuilder->select(SchemaTypeConfigurator::TYPE_ID_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
             ->setParameter('externalId', $externalId);
@@ -27,27 +28,28 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
         if (empty($resultSet)) {
             return null;
         } else {
-            return StringLiteral::fromNative($resultSet[0]['name']);
+            return StringLiteral::fromNative($resultSet[0]['type_id']);
         }
     }
 
     /**
      * @inheritdoc
      */
-    public function saveOrganizerCdbid(StringLiteral $externalId, UUID $organizerCdbid)
-    {
+    public function saveTypeId(
+        StringLiteral $externalId,
+        StringLiteral $typeId
+    ) {
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->insert($this->getTableName()->toNative())
             ->values([
 
-
-                SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN => '?',
-                SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN => '?'
+                SchemaTypeConfigurator::EXTERNAL_ID_COLUMN => '?',
+                SchemaTypeConfigurator::TYPE_ID_COLUMN => '?'
             ])
             ->setParameters([
                 $externalId,
-                $organizerCdbid
+                $typeId
             ]);
 
         $queryBuilder->execute();
@@ -56,8 +58,10 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
     /**
      * @inheritdoc
      */
-    public function updateOrganizerCdbid(StringLiteral $externalId, UUID $organizerCdbid)
-    {
-        // TODO: Implement updateOrganizerCdbid() method.
+    public function updateTypeId(
+        StringLiteral $externalId,
+        StringLiteral $typeId
+    ) {
+        // TODO: Implement updateTypeId() method.
     }
 }
