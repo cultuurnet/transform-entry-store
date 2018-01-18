@@ -27,7 +27,9 @@ class StoreRelationDBALRepository extends AbstractDBALRepository implements Rela
         if (empty($resultSet)) {
             return null;
         } else {
-            return StringLiteral::fromNative($resultSet[0]['cdbid']);
+            $cdbid = $resultSet[0]['cdbid'];
+            $cdbidUuid = UUID::fromNative($cdbid);
+            return $cdbidUuid;
         }
     }
 

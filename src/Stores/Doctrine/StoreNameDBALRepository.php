@@ -43,8 +43,8 @@ class StoreNameDBALRepository extends AbstractDBALRepository implements NameInte
                 SchemaNameConfigurator::NAME_COLUMN => '?'
             ])
             ->setParameters([
-                $externalId,
-                $name
+                $externalId->toNative(),
+                $name->toNative()
             ]);
 
         $queryBuilder->execute();
@@ -55,14 +55,14 @@ class StoreNameDBALRepository extends AbstractDBALRepository implements NameInte
      */
     public function updateName(StringLiteral $externalId, StringLiteral $name)
     {
-        $whereId = SchemaNameConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+        $whereId = SchemaNameConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
 
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->update($this->getTableName()->toNative())
             ->set(
                 SchemaNameConfigurator::NAME_COLUMN,
-                ':name'
+                ':name_id'
             )
             ->where($whereId)
             ->setParameters([
