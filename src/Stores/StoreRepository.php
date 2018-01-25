@@ -5,6 +5,7 @@ namespace CultuurNet\TransformEntryStore\Stores;
 use CultuurNet\TransformEntryStore\ValueObjects\AgeRange\AgeRange;
 use CultuurNet\TransformEntryStore\ValueObjects\BookingInfo\BookingInfo;
 use CultuurNet\TransformEntryStore\ValueObjects\ContactPoint\ContactPoint;
+use CultuurNet\TransformEntryStore\ValueObjects\Language\LanguageCode;
 use CultuurNet\TransformEntryStore\ValueObjects\TargetAudience\TargetAudience;
 use ValueObjects\DateTime\Date;
 use ValueObjects\DateTime\Time;
@@ -37,6 +38,11 @@ class StoreRepository implements RepositoryInterface
      * @var DescriptionRepositoryInterface
      */
     private $descriptionRepository;
+
+    /**
+     * @var ImageInterface
+     */
+    private $imageRepository;
 
     /**
      * @var LabelInterface
@@ -84,6 +90,7 @@ class StoreRepository implements RepositoryInterface
         CalendarInterface $calendarRepository,
         ContactPointInterface $contactPointRepository,
         DescriptionRepositoryInterface $descriptionRepository,
+        ImageInterface $imageRepository,
         LabelInterface $labelRepository,
         LocationInterface $locationRepository,
         NameInterface $nameRepository,
@@ -98,6 +105,7 @@ class StoreRepository implements RepositoryInterface
         $this->calendarRepository = $calendarRepository;
         $this->contactPointRepository = $contactPointRepository;
         $this->descriptionRepository = $descriptionRepository;
+        $this->imageRepository = $imageRepository;
         $this->labelRepository = $labelRepository;
         $this->locationRepository = $locationRepository;
         $this->nameRepository = $nameRepository;
@@ -253,6 +261,32 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $description
     ) {
         $this->updateDescription($externalId, $description);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function saveImage(
+        StringLiteral $externalId,
+        UUID $imageId,
+        StringLiteral $description,
+        StringLiteral $copyright,
+        LanguageCode $languageCode
+    ) {
+        $this->imageRepository->saveImage($externalId, $imageId, $description, $copyright, $languageCode);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateImage(
+        StringLiteral $externalId,
+        UUID $imageId,
+        StringLiteral $description,
+        StringLiteral $copyright,
+        LanguageCode $languageCode
+    ) {
+        $this->imageRepository->updateImage($externalId, $imageId, $description, $copyright, $languageCode);
     }
 
     /**

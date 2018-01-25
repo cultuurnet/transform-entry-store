@@ -8,6 +8,7 @@ interface RepositoryInterface extends
     CalendarInterface,
     ContactPointInterface,
     DescriptionRepositoryInterface,
+    ImageInterface,
     LabelInterface,
     LocationInterface,
     NameInterface,
