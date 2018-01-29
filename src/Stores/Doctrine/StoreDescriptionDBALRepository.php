@@ -60,14 +60,14 @@ class StoreDescriptionDBALRepository extends AbstractDBALRepository implements D
         StringLiteral $externalId,
         StringLiteral $description
     ) {
-        $whereId = SchemaDescriptionConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
+        $whereId = SchemaDescriptionConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
 
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->update($this->getTableName()->toNative())
             ->set(
                 SchemaDescriptionConfigurator::DESCRIPTION_COLUMN,
-                ':description'
+                ':description_id'
             )
             ->where($whereId)
             ->setParameters([
