@@ -18,7 +18,7 @@ class StoreNameDBALRepository extends AbstractDBALRepository implements NameInte
         $queryBuilder->select(SchemaNameConfigurator::NAME_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
-            ->setParameter('externalId', $externalId);
+            ->setParameter('externalId', $externalId->toNative());
 
         $statement = $queryBuilder->execute();
         $resultSet = $statement->fetchAll();
@@ -26,7 +26,7 @@ class StoreNameDBALRepository extends AbstractDBALRepository implements NameInte
         if (empty($resultSet)) {
             return null;
         } else {
-            return StringLiteral::fromNative($resultSet[0]['name']);
+            return StringLiteral::fromNative($resultSet[0]['name_id']);
         }
     }
 

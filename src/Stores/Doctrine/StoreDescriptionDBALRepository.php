@@ -27,7 +27,7 @@ class StoreDescriptionDBALRepository extends AbstractDBALRepository implements D
         if (empty($resultSet)) {
             return null;
         } else {
-            return StringLiteral::fromNative($resultSet[0]['description']);
+            return StringLiteral::fromNative($resultSet[0]['description_id']);
         }
     }
     

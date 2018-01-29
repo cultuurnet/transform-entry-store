@@ -27,7 +27,7 @@ class StoreLocationDBALRepository extends AbstractDBALRepository implements Loca
         if (empty($resultSet)) {
             return null;
         } else {
-            return StringLiteral::fromNative($resultSet[0]['name']);
+            return StringLiteral::fromNative($resultSet[0]['location_id']);
         }
     }
 

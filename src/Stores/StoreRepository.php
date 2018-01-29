@@ -172,7 +172,7 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $externalId,
         BookingInfo $bookingInfo
     ) {
-        $this->updateBookingInfo($externalId, $bookingInfo);
+        $this->bookingInfoRepository->updateBookingInfo($externalId, $bookingInfo);
     }
 
     /**
@@ -221,7 +221,7 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $externalId,
         ContactPoint $contactPoint
     ) {
-        $this->saveContactPoint($externalId, $contactPoint);
+        $this->contactPointRepository->saveContactPoint($externalId, $contactPoint);
     }
 
     /**
@@ -260,7 +260,7 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $externalId,
         StringLiteral $description
     ) {
-        $this->updateDescription($externalId, $description);
+        $this->descriptionRepository->updateDescription($externalId, $description);
     }
 
     /**
@@ -469,7 +469,7 @@ class StoreRepository implements RepositoryInterface
     public function getTypeId(
         StringLiteral $externalId
     ) {
-        return $this->getTypeId($externalId);
+        return $this->typeRepository->getTypeId($externalId);
     }
 
     /**
