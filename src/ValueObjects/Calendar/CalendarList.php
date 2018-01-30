@@ -29,6 +29,7 @@ class CalendarList implements ValueObjectInterface
     public function sameValueAs(ValueObjectInterface $object)
     {
         // TODO: Implement sameValueAs() method.
+        return true;
     }
 
     /**
