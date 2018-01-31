@@ -408,8 +408,7 @@ class StoreRepository implements RepositoryInterface
      */
     public function getPrice(
         StringLiteral $externalId
-    )
-    {
+    ) {
         $this->priceRepository->getPrice($externalId);
     }
 
@@ -418,9 +417,8 @@ class StoreRepository implements RepositoryInterface
      */
     public function deletePrice(
         StringLiteral $externalId
-    )
-    {
-        $this->priceRepository->deletePrice();
+    ) {
+        $this->priceRepository->deletePrice($externalId);
     }
 
     /**
@@ -432,8 +430,7 @@ class StoreRepository implements RepositoryInterface
         $name,
         $price,
         $currency
-    )
-    {
+    ) {
         $this->priceRepository->savePrice($externalId, $isBasePrice, $name, $price, $currency);
     }
 
