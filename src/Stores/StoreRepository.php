@@ -65,6 +65,11 @@ class StoreRepository implements RepositoryInterface
     private $organizerRepository;
 
     /**
+     * @var PriceInterface
+     */
+    private $priceRepository;
+
+    /**
      * @var RelationInterface
      */
     private $relationRepository;
@@ -95,6 +100,7 @@ class StoreRepository implements RepositoryInterface
         LocationInterface $locationRepository,
         NameInterface $nameRepository,
         OrganizerInterface $organizerRepository,
+        PriceInterface $priceRepository,
         RelationInterface $relationRepository,
         TargetAudienceInterface $targetAudienceRepository,
         ThemeRepositoryInterface $themeRepository,
@@ -110,6 +116,7 @@ class StoreRepository implements RepositoryInterface
         $this->locationRepository = $locationRepository;
         $this->nameRepository = $nameRepository;
         $this->organizerRepository = $organizerRepository;
+        $this->priceRepository = $priceRepository;
         $this->relationRepository = $relationRepository;
         $this->targetAudienceRepository = $targetAudienceRepository;
         $this->themeRepository = $themeRepository;
@@ -394,6 +401,40 @@ class StoreRepository implements RepositoryInterface
         UUID $organizerCdbid
     ) {
         $this->organizerRepository->updateOrganizerCdbid($externalId, $organizerCdbid);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPrice(
+        StringLiteral $externalId
+    )
+    {
+        $this->priceRepository->getPrice($externalId);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function deletePrice(
+        StringLiteral $externalId
+    )
+    {
+        $this->priceRepository->deletePrice();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function savePrice(
+        StringLiteral $externalId,
+        $isBasePrice,
+        $name,
+        $price,
+        $currency
+    )
+    {
+        $this->priceRepository->savePrice($externalId, $isBasePrice, $name, $price, $currency);
     }
 
     /**
