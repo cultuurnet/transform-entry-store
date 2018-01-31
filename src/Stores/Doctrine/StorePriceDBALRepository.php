@@ -60,6 +60,7 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
         $price,
         $currency
     ) {
+        $isBasePriceInt = $isBasePrice ? 1 : 0;
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->insert($this->getTableName()->toNative())
@@ -68,11 +69,11 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
                 SchemaPriceInfoConfigurator::IS_BASE_PRICE_COLUMN => '?',
                 SchemaPriceInfoConfigurator::NAME_COLUMN => '?',
                 SchemaPriceInfoConfigurator::PRICE_COLUMN => '?',
-                SchemaPriceInfoConfigurator::CURRENCY_COLUMN
+                SchemaPriceInfoConfigurator::CURRENCY_COLUMN => '?'
             ])
             ->setParameters([
                 $externalId,
-                $isBasePrice,
+                $isBasePriceInt,
                 $name,
                 $price,
                 $currency

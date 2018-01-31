@@ -409,7 +409,7 @@ class StoreRepository implements RepositoryInterface
     public function getPrice(
         StringLiteral $externalId
     ) {
-        $this->priceRepository->getPrice($externalId);
+        return $this->priceRepository->getPrice($externalId);
     }
 
     /**
