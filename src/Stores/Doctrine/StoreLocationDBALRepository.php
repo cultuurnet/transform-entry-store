@@ -57,6 +57,21 @@ class StoreLocationDBALRepository extends AbstractDBALRepository implements Loca
      */
     public function updateLocationCdbid(StringLiteral $externalId, UUID $locationCdbid)
     {
-        // TODO: Implement updateLocationCdbid() method.
+        $whereId = SchemaLocationConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
+
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->update($this->getTableName()->toNative())
+            ->set(
+                SchemaLocationConfigurator::LOCATION_CDBID_COLUMN,
+                ':location_id'
+            )
+            ->where($whereId)
+            ->setParameters([
+                SchemaLocationConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative(),
+                SchemaLocationConfigurator::LOCATION_CDBID_COLUMN => $locationCdbid->toNative()
+            ]);
+
+        $queryBuilder->execute();
     }
 }

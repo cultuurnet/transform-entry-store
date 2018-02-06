@@ -58,6 +58,21 @@ class StoreOrganizerDBALRepository extends AbstractDBALRepository implements Org
      */
     public function updateOrganizerCdbid(StringLiteral $externalId, UUID $organizerCdbid)
     {
-        // TODO: Implement updateOrganizerCdbid() method.
+        $whereId = SchemaLocationConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
+
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->update($this->getTableName()->toNative())
+            ->set(
+                SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN,
+                ':organizer_id'
+            )
+            ->where($whereId)
+            ->setParameters([
+                SchemaOrganizerConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative(),
+                SchemaOrganizerConfigurator::ORGANIZER_CDBID_COLUMN => $organizerCdbid->toNative()
+            ]);
+
+        $queryBuilder->execute();
     }
 }
