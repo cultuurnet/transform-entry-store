@@ -437,6 +437,19 @@ class StoreRepository implements RepositoryInterface
     /**
      * @inheritdoc
      */
+    public function updatePrice(
+        StringLiteral $externalId,
+        $isBasePrice,
+        $name,
+        $price,
+        $currency
+    ) {
+        $this->priceRepository->updatePrice($externalId, $isBasePrice, $name, $price, $currency);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getCdbid(
         StringLiteral $externalId
     ) {

@@ -35,4 +35,19 @@ interface PriceInterface
         $price,
         $currency
     );
+
+    /**
+     * @param StringLiteral $externalId
+     * @param $isBasePrice
+     * @param $name
+     * @param $price
+     * @param $currency
+     */
+    public function updatePrice(
+        StringLiteral $externalId,
+        $isBasePrice,
+        $name,
+        $price,
+        $currency
+    );
 }

@@ -9,8 +9,7 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
 {
 
     /**
-     * @param StringLiteral $externalId
-     * @return array
+     * @inheritdoc
      */
     public function getPrice(StringLiteral $externalId)
     {
@@ -38,7 +37,7 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
     }
 
     /**
-     * @param StringLiteral $externalId
+     * @inheritdoc
      */
     public function deletePrice(
         StringLiteral $externalId
@@ -47,11 +46,7 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
     }
 
     /**
-     * @param StringLiteral $externalId
-     * @param $isBasePrice
-     * @param $name
-     * @param $price
-     * @param $currency
+     * @inheritdoc
      */
     public function savePrice(
         StringLiteral $externalId,
@@ -77,6 +72,37 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
                 $name,
                 $price,
                 $currency
+            ]);
+
+        $queryBuilder->execute();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updatePrice(
+        StringLiteral $externalId,
+        $isBasePrice,
+        $name,
+        $price,
+        $currency
+    ) {
+        $whereId = SchemaPriceInfoConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
+        $nameId = SchemaPriceInfoConfigurator::NAME_COLUMN . ' = :name_id';
+
+        $queryBuilder = $this->createQueryBuilder();
+
+        $queryBuilder->update($this->getTableName()->toNative())
+            ->set(
+                SchemaPriceInfoConfigurator::PRICE_COLUMN,
+                ':price'
+            )
+            ->where($whereId)
+            ->andWhere($nameId)
+            ->setParameters([
+                SchemaPriceInfoConfigurator::NAME_COLUMN =>$name,
+                SchemaPriceInfoConfigurator::EXTERNAL_ID_COLUMN => $externalId->toNative(),
+                SchemaPriceInfoConfigurator::PRICE_COLUMN => $price
             ]);
 
         $queryBuilder->execute();
