@@ -88,7 +88,7 @@ class StorePriceDBALRepository extends AbstractDBALRepository implements PriceIn
         $currency
     ) {
         $whereId = SchemaPriceInfoConfigurator::EXTERNAL_ID_COLUMN . ' = :external_id';
-        $nameId = SchemaPriceInfoConfigurator::NAME_COLUMN . ' = :name_id';
+        $nameId = SchemaPriceInfoConfigurator::NAME_COLUMN . ' = :name';
 
         $queryBuilder = $this->createQueryBuilder();
 
