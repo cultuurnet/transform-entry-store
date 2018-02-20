@@ -45,6 +45,7 @@ class SchemaPriceInfoConfigurator implements SchemaConfiguratorInterface
             ->setLength(128)
             ->setNotnull(true);
         $table->addColumn(self::PRICE_COLUMN, TYPE::DECIMAL)
+            ->setScale(2)
             ->setNotnull(true);
         $table->addColumn(self::CURRENCY_COLUMN, TYPE::STRING)
             ->setLength(3)
