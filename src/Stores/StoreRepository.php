@@ -40,6 +40,11 @@ class StoreRepository implements RepositoryInterface
     private $descriptionRepository;
 
     /**
+     * @var EventProductionInterface
+     */
+    private $eventProductionRepository;
+
+    /**
      * @var ImageInterface
      */
     private $imageRepository;
@@ -95,6 +100,7 @@ class StoreRepository implements RepositoryInterface
         CalendarInterface $calendarRepository,
         ContactPointInterface $contactPointRepository,
         DescriptionRepositoryInterface $descriptionRepository,
+        EventProductionInterface $eventProductionRepository,
         ImageInterface $imageRepository,
         LabelInterface $labelRepository,
         LocationInterface $locationRepository,
@@ -111,6 +117,7 @@ class StoreRepository implements RepositoryInterface
         $this->calendarRepository = $calendarRepository;
         $this->contactPointRepository = $contactPointRepository;
         $this->descriptionRepository = $descriptionRepository;
+        $this->eventProductionRepository = $eventProductionRepository;
         $this->imageRepository = $imageRepository;
         $this->labelRepository = $labelRepository;
         $this->locationRepository = $locationRepository;
@@ -268,6 +275,25 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $description
     ) {
         $this->descriptionRepository->updateDescription($externalId, $description);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCdbids(
+        StringLiteral $externalId
+    ) {
+        $this->eventProductionRepository->getCdbids($externalId);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function saveEventProduction(
+        StringLiteral $externalIdEvent,
+        StringLiteral $externalIdProduction
+    ) {
+        $this->eventProductionRepository->saveEventProduction($externalIdProduction, $externalIdProduction);
     }
 
     /**
