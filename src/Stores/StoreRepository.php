@@ -290,7 +290,7 @@ class StoreRepository implements RepositoryInterface
     public function getCdbids(
         StringLiteral $externalId
     ) {
-        $this->eventProductionRepository->getCdbids($externalId);
+        return $this->eventProductionRepository->getCdbids($externalId);
     }
 
     /**
@@ -487,7 +487,7 @@ class StoreRepository implements RepositoryInterface
     public function getProductionCdbid(
         StringLiteral $externalId
     ) {
-        $this->productionRepository->getProductionCdbid($externalId);
+        return $this->productionRepository->getProductionCdbid($externalId);
     }
 
     /**
