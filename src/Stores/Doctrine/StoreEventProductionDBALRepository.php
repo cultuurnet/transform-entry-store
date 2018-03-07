@@ -34,19 +34,24 @@ class StoreEventProductionDBALRepository extends AbstractDBALRepository implemen
     /**
      * @inheritdoc
      */
-    public function saveEventProduction(StringLiteral $externalIdEvent, StringLiteral $externalIdProduction)
-    {
+    public function saveEventProduction(
+        StringLiteral $externalIdEvent,
+        StringLiteral $externalIdProduction,
+        UUID $cdbid
+    ) {
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->insert($this->getTableName()->toNative())
             ->values([
 
                 SchemaEventProductionConfigurator::EXTERNAL_ID_EVENT_COLUMN => '?',
-                SchemaEventProductionConfigurator::EXTERNAL_ID_PRODUCTION_COLUMN => '?'
+                SchemaEventProductionConfigurator::EXTERNAL_ID_PRODUCTION_COLUMN => '?',
+                SchemaEventProductionConfigurator::CDBID_EVENT_COLUMN => '?'
             ])
             ->setParameters([
                 $externalIdEvent,
-                $externalIdProduction
+                $externalIdProduction,
+                $cdbid
             ]);
 
         $queryBuilder->execute();

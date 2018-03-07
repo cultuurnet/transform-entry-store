@@ -298,9 +298,10 @@ class StoreRepository implements RepositoryInterface
      */
     public function saveEventProduction(
         StringLiteral $externalIdEvent,
-        StringLiteral $externalIdProduction
+        StringLiteral $externalIdProduction,
+        UUID $cdbid
     ) {
-        $this->eventProductionRepository->saveEventProduction($externalIdProduction, $externalIdProduction);
+        $this->eventProductionRepository->saveEventProduction($externalIdProduction, $externalIdProduction, $cdbid);
     }
 
     /**

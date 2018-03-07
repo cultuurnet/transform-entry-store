@@ -18,10 +18,12 @@ interface EventProductionInterface
     /**
      * @param StringLiteral $externalIdEvent
      * @param StringLiteral $externalIdProduction
+     * @param UUID $cdbid
      * @return void
      */
     public function saveEventProduction(
         StringLiteral $externalIdEvent,
-        StringLiteral $externalIdProduction
+        StringLiteral $externalIdProduction,
+        UUID $cdbid
     );
 }
