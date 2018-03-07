@@ -2,21 +2,21 @@
 
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
-use CultuurNet\TransformEntryStore\Stores\EventProductionInterface;
+use CultuurNet\TransformEntryStore\Stores\ProductionInterface;
 use ValueObjects\StringLiteral\StringLiteral;
 use ValueObjects\Identity\UUID;
 
-class StoreEventProductionDBALRepository extends AbstractDBALRepository implements EventProductionInterface
+class StoreProductionDBALRepository extends AbstractDBALRepository implements ProductionInterface
 {
     /**
      * @inheritdoc
      */
-    public function getCdbids(StringLiteral $externalId)
+    public function getProductionCdbid(StringLiteral $externalId)
     {
-        $whereId = SchemaEventProductionConfigurator::EXTERNAL_ID_PRODUCTION_COLUMN . ' = :externalId';
+        $whereId = SchemaRelationConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();
-        $queryBuilder->select(SchemaEventProductionConfigurator::CDBID_EVENT_COLUMN)
+        $queryBuilder->select(SchemaRelationConfigurator::CDBID_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
             ->setParameter('externalId', $externalId);
@@ -27,26 +27,27 @@ class StoreEventProductionDBALRepository extends AbstractDBALRepository implemen
         if (empty($resultSet)) {
             return null;
         } else {
-            return $resultSet;
+            $cdbid = $resultSet[0]['cdbid'];
+            $cdbidUuid = UUID::fromNative($cdbid);
+            return $cdbidUuid;
         }
     }
 
     /**
      * @inheritdoc
      */
-    public function saveEventProduction(StringLiteral $externalIdEvent, StringLiteral $externalIdProduction)
+    public function saveProductionCdbid(StringLiteral $externalId, UUID $cdbid)
     {
         $queryBuilder = $this->createQueryBuilder();
 
         $queryBuilder->insert($this->getTableName()->toNative())
             ->values([
-
-                SchemaEventProductionConfigurator::EXTERNAL_ID_EVENT_COLUMN => '?',
-                SchemaEventProductionConfigurator::EXTERNAL_ID_PRODUCTION_COLUMN => '?'
+                SchemaRelationConfigurator::EXTERNAL_ID_COLUMN => '?',
+                SchemaRelationConfigurator::CDBID_COLUMN => '?'
             ])
             ->setParameters([
-                $externalIdEvent,
-                $externalIdProduction
+                $externalId,
+                $cdbid
             ]);
 
         $queryBuilder->execute();

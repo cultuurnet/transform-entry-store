@@ -11,6 +11,8 @@ class SchemaEventProductionConfigurator implements SchemaConfiguratorInterface
 {
     const EXTERNAL_ID_EVENT_COLUMN = 'external_id_event';
     const EXTERNAL_ID_PRODUCTION_COLUMN = 'external_id_production';
+    const CDBID_EVENT_COLUMN = 'cdbid_event';
+
     /**
      * @var StringLiteral
      */
@@ -38,9 +40,11 @@ class SchemaEventProductionConfigurator implements SchemaConfiguratorInterface
         $table->addColumn(self::EXTERNAL_ID_PRODUCTION_COLUMN, Type::STRING)
             ->setLength(128)
             ->setNotnull(true);
+        $table->addColumn(self::CDBID_EVENT_COLUMN, Type::GUID)
+            ->setNotnull(true);
 
 
-        $table->addUniqueIndex([self::EXTERNAL_ID_EVENT_COLUMN]);
+        $table->addUniqueIndex([self::EXTERNAL_ID_EVENT_COLUMN, self::CDBID_EVENT_COLUMN]);
 
         $schemaManager->createTable($table);
     }

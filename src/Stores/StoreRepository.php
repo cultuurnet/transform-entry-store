@@ -70,6 +70,11 @@ class StoreRepository implements RepositoryInterface
     private $organizerRepository;
 
     /**
+     * @var ProductionInterface
+     */
+    private $productionRepository;
+
+    /**
      * @var PriceInterface
      */
     private $priceRepository;
@@ -107,6 +112,7 @@ class StoreRepository implements RepositoryInterface
         NameInterface $nameRepository,
         OrganizerInterface $organizerRepository,
         PriceInterface $priceRepository,
+        ProductionInterface $productionRepository,
         RelationInterface $relationRepository,
         TargetAudienceInterface $targetAudienceRepository,
         ThemeRepositoryInterface $themeRepository,
@@ -124,6 +130,7 @@ class StoreRepository implements RepositoryInterface
         $this->nameRepository = $nameRepository;
         $this->organizerRepository = $organizerRepository;
         $this->priceRepository = $priceRepository;
+        $this->productionRepository = $productionRepository;
         $this->relationRepository = $relationRepository;
         $this->targetAudienceRepository = $targetAudienceRepository;
         $this->themeRepository = $themeRepository;
@@ -471,6 +478,25 @@ class StoreRepository implements RepositoryInterface
         $currency
     ) {
         $this->priceRepository->updatePrice($externalId, $isBasePrice, $name, $price, $currency);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getProductionCdbid(
+        StringLiteral $externalId
+    ) {
+        $this->productionRepository->getProductionCdbid($externalId);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function saveProductionCdbid(
+        StringLiteral $externalId,
+        UUID $cdbid
+    ) {
+        $this->productionRepository->saveProductionCdbid($externalId, $cdbid);
     }
 
     /**

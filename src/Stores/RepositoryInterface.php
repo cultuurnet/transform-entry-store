@@ -15,6 +15,7 @@ interface RepositoryInterface extends
     NameInterface,
     OrganizerInterface,
     PriceInterface,
+    ProductionInterface,
     RelationInterface,
     TargetAudienceInterface,
     ThemeRepositoryInterface,
