@@ -7,8 +7,6 @@ use CultuurNet\TransformEntryStore\ValueObjects\BookingInfo\BookingInfo;
 use CultuurNet\TransformEntryStore\ValueObjects\ContactPoint\ContactPoint;
 use CultuurNet\TransformEntryStore\ValueObjects\Language\LanguageCode;
 use CultuurNet\TransformEntryStore\ValueObjects\TargetAudience\TargetAudience;
-use ValueObjects\DateTime\Date;
-use ValueObjects\DateTime\Time;
 use ValueObjects\Identity\UUID;
 use ValueObjects\StringLiteral\StringLiteral;
 

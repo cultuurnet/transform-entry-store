@@ -2,8 +2,6 @@
 
 namespace CultuurNet\TransformEntryStore\Stores;
 
-use ValueObjects\DateTime\Date;
-use ValueObjects\DateTime\Time;
 use ValueObjects\StringLiteral\StringLiteral;
 
 interface CalendarInterface
