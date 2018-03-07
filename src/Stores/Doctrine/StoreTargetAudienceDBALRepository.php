@@ -6,7 +6,6 @@ use CultuurNet\TransformEntryStore\Stores\TargetAudienceInterface;
 
 use CultuurNet\TransformEntryStore\ValueObjects\TargetAudience\TargetAudience;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Identity\UUID;
 
 class StoreTargetAudienceDBALRepository extends AbstractDBALRepository implements TargetAudienceInterface
 {

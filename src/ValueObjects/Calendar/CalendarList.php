@@ -2,9 +2,6 @@
 
 namespace CultuurNet\TransformEntryStore\ValueObjects\Calendar;
 
-use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Web\EmailAddress;
-use ValueObjects\Web\Url;
 use ValueObjects\ValueObjectInterface;
 
 class CalendarList implements ValueObjectInterface

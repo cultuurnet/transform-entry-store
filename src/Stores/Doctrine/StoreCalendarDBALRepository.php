@@ -3,8 +3,6 @@
 namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
 use CultuurNet\TransformEntryStore\Stores\CalendarInterface;
-use ValueObjects\DateTime\Date;
-use ValueObjects\DateTime\Time;
 use ValueObjects\StringLiteral\StringLiteral;
 
 class StoreCalendarDBALRepository extends AbstractDBALRepository implements CalendarInterface

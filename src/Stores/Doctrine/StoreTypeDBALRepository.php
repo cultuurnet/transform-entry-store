@@ -4,7 +4,6 @@ namespace CultuurNet\TransformEntryStore\Stores\Doctrine;
 
 use CultuurNet\TransformEntryStore\Stores\TypeRepositoryInterface;
 use ValueObjects\StringLiteral\StringLiteral;
-use ValueObjects\Identity\UUID;
 
 class StoreTypeDBALRepository extends AbstractDBALRepository implements TypeRepositoryInterface
 {
