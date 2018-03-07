@@ -301,7 +301,7 @@ class StoreRepository implements RepositoryInterface
         StringLiteral $externalIdProduction,
         UUID $cdbid
     ) {
-        $this->eventProductionRepository->saveEventProduction($externalIdProduction, $externalIdProduction, $cdbid);
+        $this->eventProductionRepository->saveEventProduction($externalIdEvent, $externalIdProduction, $cdbid);
     }
 
     /**
