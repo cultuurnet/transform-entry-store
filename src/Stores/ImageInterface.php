@@ -10,6 +10,12 @@ interface ImageInterface
 {
     /**
      * @param StringLiteral $externalId
+     * @return StringLiteral
+     */
+    public function getImageId($externalId);
+
+    /**
+     * @param StringLiteral $externalId
      * @param UUID $imageId
      * @param StringLiteral $description
      * @param StringLiteral $copyright

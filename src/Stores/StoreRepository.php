@@ -305,6 +305,15 @@ class StoreRepository implements RepositoryInterface
     /**
      * @inheritdoc
      */
+    public function getImageId(
+        $externalId
+    ) {
+        return $this->imageRepository->getImageId($externalId);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function saveImage(
         StringLiteral $externalId,
         UUID $imageId,
