@@ -519,6 +519,15 @@ class StoreRepository implements RepositoryInterface
     /**
      * @inheritdoc
      */
+    public function getExternalId(
+        UUID $cdbid
+    ) {
+        return $this->relationRepository->getExternalId($cdbid);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function saveCdbid(
         StringLiteral $externalId,
         UUID $cdbid

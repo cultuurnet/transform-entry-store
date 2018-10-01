@@ -9,8 +9,8 @@ use ValueObjects\Identity\UUID;
 class StoreRelationDBALRepository extends AbstractDBALRepository implements RelationInterface
 {
     /**
-     * @inheritdoc
-     */
+ * @inheritdoc
+ */
     public function getCdbid(StringLiteral $externalId)
     {
         $whereId = SchemaRelationConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
@@ -30,6 +30,30 @@ class StoreRelationDBALRepository extends AbstractDBALRepository implements Rela
             $cdbid = $resultSet[0]['cdbid'];
             $cdbidUuid = UUID::fromNative($cdbid);
             return $cdbidUuid;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExternalId(UUID $cdbid)
+    {
+        $whereId = SchemaRelationConfigurator::CDBID_COLUMN . ' = :cdbid';
+
+        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder->select(SchemaRelationConfigurator::EXTERNAL_ID_COLUMN)
+            ->from($this->getTableName()->toNative())
+            ->where($whereId)
+            ->setParameter('cdbid', $cdbid);
+
+        $statement = $queryBuilder->execute();
+        $resultSet = $statement->fetchAll();
+
+        if (empty($resultSet)) {
+            return null;
+        } else {
+            $external_id = $resultSet[0]['external_id'];
+            return $external_id;
         }
     }
 

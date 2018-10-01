@@ -14,9 +14,6 @@ class StoreImageDBALRepository extends AbstractDBALRepository implements ImageIn
      */
     public function getImageId($externalId)
     {
-
-        // TODO: Implement getImage() method.
-
         $whereId = SchemaImageConfigurator::EXTERNAL_ID_COLUMN . ' = :externalId';
 
         $queryBuilder = $this->createQueryBuilder();

@@ -14,6 +14,14 @@ interface RelationInterface
     public function getCdbid(
         StringLiteral $externalId
     );
+
+    /**
+     * @param UUID $cdbid
+     * @return StringLiteral
+     */
+    public function getExternalId(
+        UUID $cdbid
+    );
     
     /**
      * @param StringLiteral $externalId
