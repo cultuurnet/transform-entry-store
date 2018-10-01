@@ -20,7 +20,7 @@ class StoreImageDBALRepository extends AbstractDBALRepository implements ImageIn
         $queryBuilder->select(SchemaImageConfigurator::IMAGE_ID_COLUMN)
             ->from($this->getTableName()->toNative())
             ->where($whereId)
-            ->setParameter('externalId', $externalId->toNative());
+            ->setParameter('externalId', $externalId);
 
         $statement = $queryBuilder->execute();
         $resultSet = $statement->fetchAll();
