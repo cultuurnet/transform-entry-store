@@ -7,8 +7,7 @@
     "require": {
         "doctrine/dbal": "^2.5",
         "doctrine/migrations": "^1.4",
-        "cultuurnet/valueobjects": "~3.0",
-        "cultuurnet/udb3": "~0.1"
+        "cultuurnet/valueobjects": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
